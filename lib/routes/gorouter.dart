@@ -1,18 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/project.controller.dart';
-import '../ui/apps/mobilehome.dart';
+
+import '../ui/apps/apps.dart';
 import '../ui/pages/pages.dart';
 import 'routes.dart';
 
 final mainRouter = GoRouter(
   initialLocation: MainRoutes.home.path,
-  // debugLogDiagnostics: true,
   routes: [
     ShellRoute(
       builder: (context, state, child) => BaseScaffold(child: child),
@@ -36,13 +34,6 @@ final mainRouter = GoRouter(
         GoRoute(
           path: MainRoutes.projects.path,
           builder: (context, state) => const ProjectsPage(),
-          // routes: mobileRouter.configuration.routes,
-          // routes: [
-          //   GoRoute(
-          //     path: ProjectRoutes.home.path,
-          //     builder: (context, state) => const ProjectsPage(),
-          //   ),
-          // ],
         ),
       ],
     ),
@@ -51,7 +42,6 @@ final mainRouter = GoRouter(
 
 final mobileRouter = GoRouter(
   initialLocation: ProjectRoutes.home.path,
-  // debugLogDiagnostics: true,
   routes: [
     ShellRoute(
       builder: (context, state, child) => MobileScaffold(child: child),
@@ -68,16 +58,24 @@ final mobileRouter = GoRouter(
               path: 'calculator',
               builder: (context, state) => const CalculatorApp(),
             ),
+            GoRoute(
+              path: 'asteroids',
+              builder: (context, state) => const AsteroidsApp(),
+            ),
           ],
         ),
-        GoRoute(
-          path: '/home',
-          builder: (context, state) => const MobileHomePage(),
-        ),
-        GoRoute(
-          path: '/calculator',
-          builder: (context, state) => const CalculatorApp(),
-        ),
+        // GoRoute(
+        //   path: '/home',
+        //   builder: (context, state) => const MobileHomePage(),
+        // ),
+        // GoRoute(
+        //   path: '/calculator',
+        //   builder: (context, state) => const CalculatorApp(),
+        // ),
+        // GoRoute(
+        //   path: '/asteroids',
+        //   builder: (context, state) => const AsteroidsApp(),
+        // ),
         GoRoute(
           path: ProjectRoutes.home.path,
           builder: (context, state) => const MobileHomePage(),
@@ -85,6 +83,10 @@ final mobileRouter = GoRouter(
         GoRoute(
           path: ProjectRoutes.calculator.path,
           builder: (context, state) => const CalculatorApp(),
+        ),
+        GoRoute(
+          path: ProjectRoutes.asteroids.path,
+          builder: (context, state) => const AsteroidsApp(),
         ),
       ],
     ),
@@ -154,23 +156,17 @@ class MobileScaffold extends StatelessWidget {
           ),
         ],
         onTap: (index) {
+          var projectController = context.read<ProjectController>();
           if (index == 0) {
-            var projectController = context.read<ProjectController>();
-            log('Selected project back: ${projectController.selectedProject?.title}');
             projectController.deselectProject();
-            log('Selected project back: ${projectController.selectedProject?.title}');
             context.go(ProjectRoutes.home.path);
           } else {
             if (context.canPop()) {
               context.pop();
             }
             var name = ModalRoute.settingsOf(context)?.name;
-            log('Current route: $name');
             if (name == null) {
-              var projectController = context.read<ProjectController>();
-              log('Selected project back: ${projectController.selectedProject?.title}');
               projectController.deselectProject();
-              log('Selected project back: ${projectController.selectedProject?.title}');
             }
           }
         },

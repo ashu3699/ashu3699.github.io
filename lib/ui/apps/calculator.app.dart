@@ -32,13 +32,12 @@ class _CalculatorAppState extends State<CalculatorApp> {
 
       body: Container(
         padding: const EdgeInsets.all(20),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // const SizedBox(height: 50),
             TextField(
               controller: input,
               decoration: const InputDecoration(
@@ -164,10 +163,8 @@ class _CalculatorAppState extends State<CalculatorApp> {
         } else if (text == 'X') {
           input.text += '*';
         } else if (text == '=') {
-          // output.text = input.text;
           final result = eval(input.text);
           output.text = result.toString();
-          // input.text = '';
         } else if (text == '⌫') {
           input.text = input.text.substring(0, input.text.length - 1);
         } else if (text == '%') {
@@ -175,29 +172,14 @@ class _CalculatorAppState extends State<CalculatorApp> {
         } else {
           input.text += text;
         }
-
-        // //evaluate the expression
-        // try {
-        //   // ignore: unused_local_variable
-        //   final result = eval(input.text);
-        //   output.text = result.toString();
-        // } catch (e) {
-        //   output.text = 'Error';
-        // }
       },
       child: Container(
         width: 70,
         height: 70,
-        decoration: BoxDecoration(
-          color: btnColor,
-          shape: BoxShape.circle,
-        ),
+        decoration: BoxDecoration(color: btnColor, shape: BoxShape.circle),
         child: Center(
           child: icon != null
-              ? Icon(
-                  icon,
-                  color: textColor,
-                )
+              ? Icon(icon, color: textColor)
               : Text(
                   text,
                   style: TextStyle(

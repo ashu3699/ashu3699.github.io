@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '../models/project.model.dart';
 import '../routes/routes.dart';
-import '../ui/apps/mobilehome.dart';
+import '../ui/apps/apps.dart';
 
 class ProjectController extends ChangeNotifier {
   static final List<Project> apps = [
@@ -14,6 +14,15 @@ class ProjectController extends ChangeNotifier {
       appWidget: () => const CalculatorApp(),
       route: ProjectRoutes.calculator.path,
     ),
+    Project(
+      title: 'Asteroids',
+      description: 'A simple game where you shoot asteroids to earn points.',
+      imageUrl: 'assets/asteroids.png',
+      appWidget: () => const AsteroidsApp(),
+      route: ProjectRoutes.asteroids.path,
+    ),
+
+    //Weather
   ];
 
   Project? selectedProject;

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../controllers/project.controller.dart';
 
 import '../../routes/gorouter.dart';
-import '../device_frames/frames.dart';
+import '../frames/frames.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -34,7 +34,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
               );
             }
             return Container(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               color: Colors.blueGrey[50],
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,10 +78,11 @@ class MobileScreenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DeviceFrame(
       device: androidDevice,
+      // device: iosDevice,
       screen: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: mobileRouter,
-        theme: ThemeData(primarySwatch: Colors.teal),
+        // theme: ThemeData(primarySwatch: Colors.teal),
       ),
     );
   }

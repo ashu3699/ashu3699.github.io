@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/project.controller.dart';
-
-export 'calculator.app.dart';
 
 class MobileHomePage extends StatefulWidget {
   const MobileHomePage({super.key});
@@ -31,20 +27,15 @@ class _MobileHomePageState extends State<MobileHomePage> {
         return GestureDetector(
           onTap: () {
             context.push(app.route);
-            log('Selected project h1: ${app.title}');
             setState(() {
               var projectController = context.read<ProjectController>();
               projectController.selectProject(app);
-              log('Selected project h2: ${projectController.selectedProject?.title}');
             });
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                app.imageUrl,
-                height: 80,
-              ),
+              Image.asset(app.imageUrl, height: 80),
               const SizedBox(height: 8),
               Text(app.title),
             ],
