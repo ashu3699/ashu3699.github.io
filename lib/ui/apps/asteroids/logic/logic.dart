@@ -9,7 +9,7 @@ import '../models/player.dart';
 
 FocusNode focusNode = FocusNode();
 bool isGameLost = false, isGameWon = false;
-int shootingSpeed = 10, timeElapsed = 0;
+int shootingSpeed = 10, timeElapsed = 0, score = 0;
 
 List<Particle> particles = [];
 List<Bullet> bullets = [];
@@ -25,16 +25,18 @@ void resetGame(setState) {
     player = Player(position: position);
 
     particles = generateParticles(
-        count: 5,
-        screenSize: size,
-        playerPosition: player.position,
-        safeDistance: 50,
-        minSize: 5,
-        maxSize: 10,
-        minVelocity: 0.5,
-        maxVelocity: 2);
+      count: 5,
+      screenSize: size,
+      playerPosition: player.position,
+      safeDistance: 50,
+      minSize: 10,
+      maxSize: 15,
+      minVelocity: 0.5,
+      maxVelocity: 2,
+    );
     bullets.clear();
     timeElapsed = 0;
+    score = 0;
     isGameLost = false;
     isGameWon = false;
 
@@ -78,6 +80,7 @@ void moveParticlesAndBullets(setState) {
   for (var bullet in bullets) {
     particles.removeWhere((particle) {
       if (particle.collidesWithBullet(bullet)) {
+        score++;
         particlesToRemove.add(particle);
         return true;
       }
@@ -98,6 +101,7 @@ void moveParticlesAndBullets(setState) {
 void gameLost(setState) {
   setState(() {
     isGameLost = true;
+
     if (gameTimer.isActive) {
       gameTimer.cancel();
     }
@@ -107,6 +111,7 @@ void gameLost(setState) {
 void gameWon(setState) {
   setState(() {
     isGameWon = true;
+
     if (gameTimer.isActive) {
       gameTimer.cancel();
     }
@@ -121,7 +126,6 @@ void startTimer(setState) {
         timeElapsed++;
         updateParticles(setState);
         updateBullets(setState);
-        checkCollisions(setState);
       });
     },
   );
@@ -154,28 +158,6 @@ void updateBullets(setState) {
 
   setState(() {
     bullets.removeWhere((bullet) => bulletsToRemove.contains(bullet));
-  });
-}
-
-void checkCollisions(setState) {
-  setState(() {
-    bullets.removeWhere((bullet) {
-      bool hit = false;
-
-      particles.removeWhere((particle) {
-        if (particle.collidesWithBullet(bullet)) {
-          hit = true;
-          return true;
-        }
-        return false;
-      });
-
-      return hit;
-    });
-
-    if (particles.isEmpty) {
-      gameWon(setState);
-    }
   });
 }
 

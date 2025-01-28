@@ -63,6 +63,11 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            'Score: $score',
+            style: const TextStyle(fontSize: 24, color: Colors.white),
+          ),
+          const SizedBox(height: 20),
           const Text(
             'You Won!',
             style: TextStyle(fontSize: 32, color: Colors.white),
@@ -91,6 +96,11 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            'Score: $score',
+            style: const TextStyle(fontSize: 24, color: Colors.white),
+          ),
+          const SizedBox(height: 20),
           const Text(
             'Game Over',
             style: TextStyle(fontSize: 32, color: Colors.white),
@@ -180,6 +190,14 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
           left: 20,
           child: Text(
             'Timer: ${timeElapsed ~/ 60}:${timeElapsed % 60}',
+            style: const TextStyle(fontSize: 24, color: Colors.white),
+          ),
+        ),
+        Positioned(
+          top: 20,
+          right: 20,
+          child: Text(
+            'Score: $score',
             style: const TextStyle(fontSize: 24, color: Colors.white),
           ),
         ),
