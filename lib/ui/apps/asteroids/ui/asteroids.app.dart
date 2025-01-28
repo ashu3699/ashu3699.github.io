@@ -18,6 +18,7 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
     super.initState();
     startAnimation(setState);
     startTimer(setState);
+    focusNode = FocusNode();
     focusNode.requestFocus();
   }
 

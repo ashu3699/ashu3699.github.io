@@ -7,7 +7,7 @@ import '../models/bullet.dart';
 import '../models/particle.dart';
 import '../models/player.dart';
 
-final focusNode = FocusNode();
+FocusNode focusNode = FocusNode();
 bool isGameLost = false, isGameWon = false;
 int shootingSpeed = 10, timeElapsed = 0;
 
