@@ -44,12 +44,12 @@ final mainRouter = GoRouter(
         GoRoute(
           path: MainRoutes.projects.path,
           builder: (context, state) => const ProjectsPage(),
-          routes: [
-            GoRoute(
-              path: 'home',
-              builder: (context, state) => const ProjectsPage(),
-            ),
-          ],
+          // routes: [
+          //   GoRoute(
+          //     path: 'home',
+          //     builder: (context, state) => const ProjectsPage(),
+          //   ),
+          // ],
         ),
       ],
     ),
@@ -67,62 +67,22 @@ final mobileRouter = GoRouter(
         GoRoute(
           path: MainRoutes.projects.path,
           builder: (context, state) => const MobileHomePage(),
-          routes: [
-            GoRoute(
-              path: 'home',
-              builder: (context, state) => const MobileHomePage(),
-            ),
-            ...ProjectRoutes.values.map(
-              (route) => GoRoute(
-                path: route.toString().split('.').last,
-                builder: (context, state) {
-                  final ProjectController projectController =
-                      context.read<ProjectController>();
-                  final project = projectController.apps.firstWhere(
-                    (project) => project.route == route.path,
-                  );
-
-                  return project.appWidget;
-                },
-              ),
-            ),
-          ],
-        ),
-        GoRoute(
-          path: '/home',
-          builder: (context, state) => const MobileHomePage(),
-        ),
-        ...ProjectRoutes.values.map(
-          (route) => GoRoute(
-            path: '/${route.toString().split('.').last}',
-            builder: (context, state) {
-              final ProjectController projectController =
-                  context.read<ProjectController>();
-              final project = projectController.apps.firstWhere(
-                (project) => project.route == route.path,
-              );
-
-              return project.appWidget;
-            },
-          ),
         ),
         GoRoute(
           path: ProjectRoutes.home.path,
           builder: (context, state) => const MobileHomePage(),
         ),
-        ...ProjectRoutes.values.map(
-          (route) => GoRoute(
-            path: route.path,
-            builder: (context, state) {
-              final ProjectController projectController =
-                  context.read<ProjectController>();
-              final project = projectController.apps.firstWhere(
-                (project) => project.route == route.path,
-              );
-
-              return project.appWidget;
-            },
-          ),
+        GoRoute(
+          path: ProjectRoutes.calculator.path,
+          builder: (context, state) => const CalculatorApp(),
+        ),
+        GoRoute(
+          path: ProjectRoutes.acharyahabba.path,
+          builder: (context, state) => const AcharyaHabbaApp(),
+        ),
+        GoRoute(
+          path: ProjectRoutes.asteroids.path,
+          builder: (context, state) => const AsteroidsApp(),
         ),
       ],
     ),
