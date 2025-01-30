@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  backdrop:
+    dependency: "direct main"
+    description:
+      name: backdrop
+      sha256: cb7450b465b638835cf5908ee96785dd7d324029beb96fa7a7b6d81216610cda
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -89,14 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  device_preview:
+  device_preview_plus:
     dependency: "direct main"
     description:
-      name: device_preview
-      sha256: a694acdd3894b4c7d600f4ee413afc4ff917f76026b97ab06575fe886429ef19
+      name: device_preview_plus
+      sha256: caee6de21c24f5b229c792e29b3caf409c6448c376a86899ec999bd2f2205fb9
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "2.2.5"
   fake_async:
     dependency: transitive
     description:
@@ -169,7 +177,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_web_plugins:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -193,10 +201,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: daf3ff5570f55396b2d2c9bf8136d7db3a8acf208ac0cef92a3ae2beb9a81550
+      sha256: "9b736a9fa879d8ad6df7932cbdcc58237c173ab004ef90d8377923d7ad731eaa"
       url: "https://pub.dev"
     source: hosted
-    version: "14.7.1"
+    version: "14.7.2"
   google_fonts:
     dependency: "direct main"
     description:
@@ -642,14 +650,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.3"
-  ticket_widget:
-    dependency: "direct main"
-    description:
-      name: ticket_widget
-      sha256: "82cfcd2296ea83b47ec474a2e55c64ac8cdfc3058ec08f079b2d05e598bdf137"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
   typed_data:
     dependency: transitive
     description:
@@ -722,14 +722,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.4"
-  url_strategy:
-    dependency: "direct main"
-    description:
-      name: url_strategy
-      sha256: "6eff69fa0900b731a23552b38b54389f399d247dbb0998f2cbdf25bef6790a7c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   uuid:
     dependency: transitive
     description:
@@ -771,5 +763,5 @@ packages:
     source: hosted
     version: "1.1.0"
 sdks:
-  dart: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.0"
+  dart: ">=3.6.1 <4.0.0"
+  flutter: ">=3.27.3"

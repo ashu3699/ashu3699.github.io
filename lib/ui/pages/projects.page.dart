@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +15,23 @@ class ProjectsPage extends StatefulWidget {
 }
 
 class _ProjectsPageState extends State<ProjectsPage> {
+  DeviceInfo selectedDevice = androidDevice;
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
+
+    if (size.width > 600) {
+      return websiteView();
+    } else {
+      return MobileScreenApp(selectedDevice: selectedDevice);
+    }
+  }
+
+  Widget websiteView() {
     return Row(
       children: [
+        SizedBox(width: 30),
         Expanded(
           child: Consumer<ProjectController>(
               builder: (context, projectController, child) {
@@ -35,36 +48,68 @@ class _ProjectsPageState extends State<ProjectsPage> {
             }
             return Container(
               padding: const EdgeInsets.all(16),
-              color: Colors.blueGrey[50],
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    projectController.selectedProject!.title,
-                    style: const TextStyle(
-                        fontSize: 28, fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Image.asset(
+                        projectController.selectedProject!.imageUrl,
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        projectController.selectedProject!.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  // Image.asset(
-                  //   _selectedProject!.imageUrl,
-                  //   height: 200,
-                  //   fit: BoxFit.cover,
-                  // ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 30),
                   Text(
                     projectController.selectedProject!.description,
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
                   ),
                 ],
               ),
             );
           }),
         ),
-        const Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: MobileScreenApp(),
-          ),
+        Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: MobileScreenApp(selectedDevice: selectedDevice),
+              ),
+            ),
+            //button to switch ios/android
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (selectedDevice == iosDevice) {
+                    selectedDevice = androidDevice;
+                  } else {
+                    selectedDevice = iosDevice;
+                  }
+                });
+              },
+              child: Text(
+                selectedDevice == iosDevice
+                    ? 'Switch to Android'
+                    : 'Switch to iOS',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
         ),
       ],
     );
@@ -72,12 +117,14 @@ class _ProjectsPageState extends State<ProjectsPage> {
 }
 
 class MobileScreenApp extends StatelessWidget {
-  const MobileScreenApp({super.key});
+  const MobileScreenApp({super.key, required this.selectedDevice});
+
+  final DeviceInfo selectedDevice;
 
   @override
   Widget build(BuildContext context) {
     return DeviceFrame(
-      device: androidDevice,
+      device: selectedDevice,
       // device: iosDevice,
       screen: MaterialApp.router(
         debugShowCheckedModeBanner: false,

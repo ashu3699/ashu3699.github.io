@@ -35,7 +35,10 @@ class _MobileHomePageState extends State<MobileHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(app.imageUrl, height: 80),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(app.imageUrl, height: 80),
+              ),
               const SizedBox(height: 8),
               Text(app.title),
             ],

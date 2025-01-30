@@ -1,3 +1,4 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -10,6 +11,7 @@ import '../ui/pages/pages.dart';
 import 'routes.dart';
 
 final mainRouter = GoRouter(
+  navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'Main Navigator'),
   initialLocation: MainRoutes.home.path,
   debugLogDiagnostics: true,
   routes: [
@@ -48,6 +50,7 @@ final mainRouter = GoRouter(
 );
 
 final mobileRouter = GoRouter(
+  navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'Mobile Navigator'),
   initialLocation: ProjectRoutes.home.path,
   debugLogDiagnostics: true,
   routes: [
@@ -126,6 +129,60 @@ class BaseScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
+
+    if (size.width > 600) {
+      return websiteView(context);
+    } else {
+      return mobileView(context);
+    }
+  }
+
+  Widget mobileView(BuildContext context) {
+    return BackdropScaffold(
+      appBar: BackdropAppBar(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.black,
+        shadowColor: Colors.black,
+        title: const Text('My Portfolio'),
+        automaticallyImplyLeading: false,
+        actions: [BackdropToggleButton(icon: AnimatedIcons.list_view)],
+      ),
+      frontLayerScrim: Colors.black,
+      backLayerBackgroundColor: Colors.black,
+      frontLayerBackgroundColor: Colors.black,
+      stickyFrontLayer: true,
+      frontLayer: child,
+      backLayer: BackdropNavigationBackLayer(
+        items: [
+          ListTile(
+            title: const Text('Home', style: TextStyle(color: Colors.white)),
+            onTap: () => context.go(MainRoutes.home.path),
+          ),
+          ListTile(
+            title: const Text('About', style: TextStyle(color: Colors.white)),
+            onTap: () => context.go(MainRoutes.about.path),
+          ),
+          ListTile(
+            title:
+                const Text('Experience', style: TextStyle(color: Colors.white)),
+            onTap: () => context.go(MainRoutes.experience.path),
+          ),
+          ListTile(
+            title:
+                const Text('Projects', style: TextStyle(color: Colors.white)),
+            onTap: () => context.go(MainRoutes.projects.path),
+          ),
+          ListTile(
+            title: const Text('Contact', style: TextStyle(color: Colors.white)),
+            onTap: () => context.go(MainRoutes.contact.path),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget websiteView(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -171,6 +228,7 @@ class MobileScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 20,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

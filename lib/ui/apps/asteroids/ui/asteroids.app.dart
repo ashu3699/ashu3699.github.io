@@ -40,6 +40,12 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
     super.dispose();
   }
 
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +80,7 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
           ),
           const SizedBox(height: 20),
           Text(
-            'You lasted ${timeElapsed ~/ 60} minutes ${timeElapsed % 60} seconds',
+            'You lasted ${formatTime(timeElapsed)}',
             style: const TextStyle(fontSize: 24, color: Colors.white),
           ),
           const SizedBox(height: 20),
@@ -107,7 +113,7 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
           ),
           const SizedBox(height: 20),
           Text(
-            'You lasted ${timeElapsed ~/ 60} minutes ${timeElapsed % 60} seconds',
+            'You lasted ${formatTime(timeElapsed)}',
             style: const TextStyle(fontSize: 24, color: Colors.white),
           ),
           const SizedBox(height: 20),
@@ -172,7 +178,7 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
                     //   player.position = Offset(player.position.dx + 10,
                     //       player.position.dy); //move right
                     // } else if (event.logicalKey == LogicalKeyboardKey.space) {
-                    //   _shoot();
+                    //   shoot(setState);
                     // }
                   });
                 },
@@ -189,7 +195,7 @@ class _AsteroidsAppState extends State<AsteroidsApp> {
           top: 20,
           left: 20,
           child: Text(
-            'Timer: ${timeElapsed ~/ 60}:${timeElapsed % 60}',
+            'Time: ${formatTime(timeElapsed)}',
             style: const TextStyle(fontSize: 24, color: Colors.white),
           ),
         ),

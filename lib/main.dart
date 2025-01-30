@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:portfolio/controllers/project.controller.dart';
 import 'package:provider/provider.dart';
-import 'package:url_strategy/url_strategy.dart';
 
 import 'routes/gorouter.dart';
 
 void main() {
-  setPathUrlStrategy();
+  usePathUrlStrategy();
   runApp(ChangeNotifierProvider(
     create: (context) => ProjectController(),
     child: const MyPortfolioApp(),

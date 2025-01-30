@@ -1,18 +1,14 @@
 import 'dart:developer';
 
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:ticket_widget/ticket_widget.dart';
 
 import '../constants/separator.dart';
 import '../models/ticket_list.dart';
 
-ticketWidget(BuildContext context, Ticket ticket,
-// User user,
-    {bool isDialog = false}) {
+ticketWidget(BuildContext context, Ticket ticket, {bool isDialog = false}) {
   Widget ticketData(Ticket ticket) {
     Icon? statusIcon;
     Color? statusColor;
@@ -151,13 +147,13 @@ ticketWidget(BuildContext context, Ticket ticket,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          // '${user.displayName!.split(' ').first}\n${user.displayName!.split(' ').last}',
                           'Admin',
                           maxLines: 2,
                           style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: GoogleFonts.rubik().fontFamily,
-                              fontWeight: FontWeight.bold),
+                            fontSize: 18,
+                            fontFamily: GoogleFonts.rubik().fontFamily,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Text(
@@ -165,9 +161,10 @@ ticketWidget(BuildContext context, Ticket ticket,
                           maxLines: 2,
                           textAlign: TextAlign.end,
                           style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: GoogleFonts.rubik().fontFamily,
-                              fontWeight: FontWeight.bold),
+                            fontSize: 18,
+                            fontFamily: GoogleFonts.rubik().fontFamily,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -201,17 +198,19 @@ ticketWidget(BuildContext context, Ticket ticket,
                         Text(
                           ticket.event.date,
                           style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: GoogleFonts.rubik().fontFamily,
-                              fontWeight: FontWeight.bold),
+                            fontSize: 18,
+                            fontFamily: GoogleFonts.rubik().fontFamily,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Text(
                           ticket.event.venue,
                           style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: GoogleFonts.rubik().fontFamily,
-                              fontWeight: FontWeight.bold),
+                            fontSize: 18,
+                            fontFamily: GoogleFonts.rubik().fontFamily,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -222,9 +221,10 @@ ticketWidget(BuildContext context, Ticket ticket,
                 Text(
                   'To be paid :  ₹${ticket.event.fees}',
                   style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: GoogleFonts.rubik().fontFamily,
-                      fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontFamily: GoogleFonts.rubik().fontFamily,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               GestureDetector(
                 onTap: () {
@@ -240,8 +240,9 @@ ticketWidget(BuildContext context, Ticket ticket,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
                     color: statusColor,
                   ),
                   padding: const EdgeInsets.all(8),
@@ -294,4 +295,75 @@ ticketWidget(BuildContext context, Ticket ticket,
       ),
     ),
   );
+}
+
+class TicketWidget extends StatefulWidget {
+  const TicketWidget({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.child,
+    this.padding,
+    this.margin,
+    this.color = Colors.white,
+    this.isCornerRounded = false,
+    this.shadow,
+  });
+
+  final double width;
+  final double height;
+  final Widget child;
+  final Color color;
+  final bool isCornerRounded;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final List<BoxShadow>? shadow;
+
+  @override
+  State<TicketWidget> createState() => _TicketWidgetState();
+}
+
+class _TicketWidgetState extends State<TicketWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return ClipPath(
+      clipper: TicketClipper(),
+      child: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        width: widget.width,
+        height: widget.height,
+        padding: widget.padding,
+        margin: widget.margin,
+        decoration: BoxDecoration(
+          boxShadow: widget.shadow,
+          color: widget.color,
+          borderRadius: widget.isCornerRounded
+              ? BorderRadius.circular(20)
+              : BorderRadius.circular(0),
+        ),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class TicketClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+
+    path.addOval(
+        Rect.fromCircle(center: Offset(0, size.height / 2), radius: 20));
+    path.addOval(Rect.fromCircle(
+        center: Offset(size.width, size.height / 2), radius: 20));
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

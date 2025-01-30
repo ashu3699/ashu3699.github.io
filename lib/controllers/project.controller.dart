@@ -7,12 +7,11 @@ import '../ui/apps/apps.dart';
 class ProjectController extends ChangeNotifier {
   final List<Project> apps = [
     Project(
-      title: 'Calculator',
-      description:
-          'A basic calculator app that supports addition, subtraction, multiplication, and division.',
-      imageUrl: 'assets/calculator.png',
-      appWidget: const CalculatorApp(),
-      route: ProjectRoutes.calculator.path,
+      title: 'Acharya Habba',
+      description: 'An event management app for Acharya Habba.',
+      imageUrl: 'assets/app_logo.png',
+      appWidget: const AcharyaHabbaApp(),
+      route: ProjectRoutes.acharyahabba.path,
     ),
     Project(
       title: 'Asteroids',
@@ -22,11 +21,12 @@ class ProjectController extends ChangeNotifier {
       route: ProjectRoutes.asteroids.path,
     ),
     Project(
-      title: 'Acahrya Habba',
-      description: 'An event management app for Acharya Habba.',
-      imageUrl: 'assets/app_logo.png',
-      appWidget: const AcharyaHabbaApp(),
-      route: ProjectRoutes.acharyahabba.path,
+      title: 'Calculator',
+      description:
+          'A basic calculator app that supports addition, subtraction, multiplication, and division.',
+      imageUrl: 'assets/calculator.png',
+      appWidget: const CalculatorApp(),
+      route: ProjectRoutes.calculator.path,
     ),
 
     //Weather
