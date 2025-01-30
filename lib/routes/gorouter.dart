@@ -44,12 +44,6 @@ final mainRouter = GoRouter(
         GoRoute(
           path: MainRoutes.projects.path,
           builder: (context, state) => const ProjectsPage(),
-          // routes: [
-          //   GoRoute(
-          //     path: 'home',
-          //     builder: (context, state) => const ProjectsPage(),
-          //   ),
-          // ],
         ),
       ],
     ),
