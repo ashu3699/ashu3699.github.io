@@ -21,14 +21,17 @@ final mainRouter = GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) => const HomePage(),
+          redirect: (context, state) => MainRoutes.home.path,
         ),
         GoRoute(
           path: MainRoutes.home.path,
           builder: (context, state) => const HomePage(),
+          redirect: (context, state) => MainRoutes.home.path,
         ),
         GoRoute(
           path: MainRoutes.about.path,
           builder: (context, state) => const AboutPage(),
+          redirect: (context, state) => MainRoutes.about.path,
         ),
         GoRoute(
           path: MainRoutes.contact.path,
