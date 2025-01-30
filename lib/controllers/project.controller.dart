@@ -8,7 +8,11 @@ class ProjectController extends ChangeNotifier {
   final List<Project> apps = [
     Project(
       title: 'Acharya Habba',
-      description: 'An event management app for Acharya Habba.',
+      description: 'An event management app for Acharya Habba.\n\n'
+          'Features include event registration, event details, and more.\n\n'
+          'Note: For demo login, use the following credentials:\n'
+          'Email: admin\n'
+          'Password: admin',
       imageUrl: 'assets/app_logo.png',
       appWidget: const AcharyaHabbaApp(),
       route: ProjectRoutes.acharyahabba.path,
