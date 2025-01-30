@@ -19,6 +19,10 @@ final mainRouter = GoRouter(
       builder: (context, state, child) => BaseScaffold(child: child),
       routes: [
         GoRoute(
+          path: '/',
+          builder: (context, state) => const HomePage(),
+        ),
+        GoRoute(
           path: MainRoutes.home.path,
           builder: (context, state) => const HomePage(),
         ),
