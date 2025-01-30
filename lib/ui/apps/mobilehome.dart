@@ -12,7 +12,7 @@ class MobileHomePage extends StatefulWidget {
 }
 
 class _MobileHomePageState extends State<MobileHomePage> {
-  final apps = ProjectController.apps;
+  final apps = ProjectController().apps;
 
   @override
   Widget build(BuildContext context) {

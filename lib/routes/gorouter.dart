@@ -11,6 +11,7 @@ import 'routes.dart';
 
 final mainRouter = GoRouter(
   initialLocation: MainRoutes.home.path,
+  debugLogDiagnostics: true,
   routes: [
     ShellRoute(
       builder: (context, state, child) => BaseScaffold(child: child),
@@ -34,6 +35,12 @@ final mainRouter = GoRouter(
         GoRoute(
           path: MainRoutes.projects.path,
           builder: (context, state) => const ProjectsPage(),
+          routes: [
+            GoRoute(
+              path: 'home',
+              builder: (context, state) => const ProjectsPage(),
+            ),
+          ],
         ),
       ],
     ),
@@ -42,6 +49,7 @@ final mainRouter = GoRouter(
 
 final mobileRouter = GoRouter(
   initialLocation: ProjectRoutes.home.path,
+  debugLogDiagnostics: true,
   routes: [
     ShellRoute(
       builder: (context, state, child) => MobileScaffold(child: child),
@@ -54,39 +62,57 @@ final mobileRouter = GoRouter(
               path: 'home',
               builder: (context, state) => const MobileHomePage(),
             ),
-            GoRoute(
-              path: 'calculator',
-              builder: (context, state) => const CalculatorApp(),
-            ),
-            GoRoute(
-              path: 'asteroids',
-              builder: (context, state) => const AsteroidsApp(),
+            ...ProjectRoutes.values.map(
+              (route) => GoRoute(
+                path: route.toString().split('.').last,
+                builder: (context, state) {
+                  final ProjectController projectController =
+                      context.read<ProjectController>();
+                  final project = projectController.apps.firstWhere(
+                    (project) => project.route == route.path,
+                  );
+
+                  return project.appWidget;
+                },
+              ),
             ),
           ],
         ),
-        // GoRoute(
-        //   path: '/home',
-        //   builder: (context, state) => const MobileHomePage(),
-        // ),
-        // GoRoute(
-        //   path: '/calculator',
-        //   builder: (context, state) => const CalculatorApp(),
-        // ),
-        // GoRoute(
-        //   path: '/asteroids',
-        //   builder: (context, state) => const AsteroidsApp(),
-        // ),
+        GoRoute(
+          path: '/home',
+          builder: (context, state) => const MobileHomePage(),
+        ),
+        ...ProjectRoutes.values.map(
+          (route) => GoRoute(
+            path: '/${route.toString().split('.').last}',
+            builder: (context, state) {
+              final ProjectController projectController =
+                  context.read<ProjectController>();
+              final project = projectController.apps.firstWhere(
+                (project) => project.route == route.path,
+              );
+
+              return project.appWidget;
+            },
+          ),
+        ),
         GoRoute(
           path: ProjectRoutes.home.path,
           builder: (context, state) => const MobileHomePage(),
         ),
-        GoRoute(
-          path: ProjectRoutes.calculator.path,
-          builder: (context, state) => const CalculatorApp(),
-        ),
-        GoRoute(
-          path: ProjectRoutes.asteroids.path,
-          builder: (context, state) => const AsteroidsApp(),
+        ...ProjectRoutes.values.map(
+          (route) => GoRoute(
+            path: route.path,
+            builder: (context, state) {
+              final ProjectController projectController =
+                  context.read<ProjectController>();
+              final project = projectController.apps.firstWhere(
+                (project) => project.route == route.path,
+              );
+
+              return project.appWidget;
+            },
+          ),
         ),
       ],
     ),

@@ -11,7 +11,10 @@ enum MainRoutes {
 enum ProjectRoutes {
   home,
   calculator,
+  acharyahabba,
   asteroids;
 
   String get path => '/projects/${toString().split('.').last}';
+
+  String get mainPath => '/${toString().split('.').last}';
 }

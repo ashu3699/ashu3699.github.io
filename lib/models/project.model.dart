@@ -4,7 +4,7 @@ class Project {
   final String title;
   final String description;
   final String imageUrl;
-  final Widget Function() appWidget;
+  final Widget appWidget;
   final String route;
 
   Project({
