@@ -14,94 +14,75 @@ class EventListPage extends StatefulWidget {
 }
 
 class _EventListPageState extends State<EventListPage> {
-  // final user = FirebaseAuth.instance.currentUser!;
   String? token;
   String searchString = "";
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getToken();
-  // }
-
-  // Future getToken() async {
-  //   token = await user.getIdToken(true);
-  //   setState(() {
-  //     token = token;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        setState(() {});
-      },
-      child: Scaffold(
-        backgroundColor: const Color(0xfff5f8fa),
-        appBar: customAppBar(context),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(1000),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withValues(alpha: .2),
-                      blurRadius: 30,
-                      offset: const Offset(0, 1),
-                    ),
-                  ],
-                ),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      searchString = value.toLowerCase();
-                    });
-                  },
-                  decoration: const InputDecoration(
-                    labelStyle:
-                        TextStyle(color: Color.fromARGB(255, 245, 11, 11)),
-                    border: InputBorder.none,
-                    labelText: 'Search Event',
-                    suffixIconColor: Color.fromARGB(255, 245, 11, 11),
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: Color.fromARGB(255, 245, 11, 11),
-                    ),
+    return Scaffold(
+      backgroundColor: const Color(0xfff5f8fa),
+      appBar: customAppBar(context),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(1000),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withValues(alpha: .2),
+                    blurRadius: 30,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    searchString = value.toLowerCase();
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 245, 11, 11)),
+                  border: InputBorder.none,
+                  labelText: 'Search Event',
+                  suffixIconColor: Color.fromARGB(255, 245, 11, 11),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Color.fromARGB(255, 245, 11, 11),
                   ),
                 ),
               ),
-              FutureBuilder<List<Event>>(
-                future: ApiService.getAllEvents(token),
-                builder: (context, snapshot) {
-                  List<Event>? eventList = snapshot.data;
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const SizedBox(
-                        height: 100,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    default:
-                      if (snapshot.hasError) {
-                        return Center(child: Text('$snapshot.error'));
-                      } else {
-                        return searchString != ""
-                            ? searchEvent(eventList)
-                            : buildEvents(eventList!);
-                      }
-                  }
-                },
-              ),
-            ],
-          ),
+            ),
+            FutureBuilder<List<Event>>(
+              future: ApiService.getAllEvents(token),
+              builder: (context, snapshot) {
+                List<Event>? eventList = snapshot.data;
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const SizedBox(
+                      height: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  default:
+                    if (snapshot.hasError) {
+                      return Center(child: Text('$snapshot.error'));
+                    } else {
+                      return searchString != ""
+                          ? searchEvent(eventList)
+                          : buildEvents(eventList!);
+                    }
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

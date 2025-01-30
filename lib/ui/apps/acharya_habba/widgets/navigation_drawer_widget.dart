@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +21,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final user = FirebaseAuth.instance.currentUser!;
     final name = 'Admin';
     final email = 'admin@acharya.ac.in';
     const photo = 'assets/logo_2.png';
@@ -110,7 +108,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -127,11 +125,11 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     const SizedBox(height: 10),
                     Text(
                       email!,
+                      softWrap: true,
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: GoogleFonts.rubik().fontFamily,
                       ),
-                      softWrap: true,
                     ),
                   ],
                 ),
@@ -154,17 +152,18 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     VoidCallback? onClicked,
   }) {
     return ListTile(
+      onTap: onClicked,
       minLeadingWidth: 0,
       selectedTileColor: Colors.grey.shade100,
       leading: Icon(icon),
       title: Text(
         title,
         style: TextStyle(
-            fontSize: 16,
-            fontFamily: GoogleFonts.rubik().fontFamily,
-            fontWeight: FontWeight.bold),
+          fontSize: 16,
+          fontFamily: GoogleFonts.rubik().fontFamily,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      onTap: onClicked,
     );
   }
 

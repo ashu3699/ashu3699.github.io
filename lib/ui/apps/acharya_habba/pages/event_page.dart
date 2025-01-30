@@ -3,7 +3,6 @@
 import 'dart:developer';
 import 'dart:ui';
 
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -25,12 +24,11 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  // final user = FirebaseAuth.instance.currentUser!;
   String? token;
 
   String? registrationCode;
   bool isRegistered = false;
-  bool loading = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,10 +36,6 @@ class _EventPageState extends State<EventPage> {
   }
 
   Future getEventData() async {
-    setState(() {
-      loading = true;
-    });
-    // token = await user.getIdToken(true);
     final resp = await ApiService.getEvent(widget.event.id, token);
 
     setState(() {
@@ -49,15 +43,9 @@ class _EventPageState extends State<EventPage> {
       isRegistered = resp[0];
       registrationCode = resp[1];
     });
-    setState(() {
-      loading = false;
-    });
   }
 
   Future registerForEvent(bool isFree) async {
-    setState(() {
-      loading = true;
-    });
     final res = await ApiService.registerForEvent(widget.event.id, token);
 
     final message = res[0];
@@ -96,9 +84,6 @@ class _EventPageState extends State<EventPage> {
           content: Text(message),
         ),
       );
-      setState(() {
-        loading = false;
-      });
     }
   }
 
@@ -113,19 +98,8 @@ class _EventPageState extends State<EventPage> {
         context: context,
         builder: (ctx) {
           return Dialog(
-            // scrollable: true,
-            // title: const Text('Ticket'),
-            // contentPadding: EdgeInsets.zero,
             child: ticketWidget(ctx, ticket, isDialog: true),
             backgroundColor: Colors.transparent,
-            // actions: [
-            //   TextButton(
-            //     child: const Text('Close'),
-            //     onPressed: () {
-            //       Navigator.of(context).pop();
-            //     },
-            //   ),
-            // ],
           );
         },
       );
@@ -173,18 +147,7 @@ class _EventPageState extends State<EventPage> {
                                 ? Colors.green
                                 : const Color(0xffed6f5e),
                             borderRadius: BorderRadius.circular(12)),
-                        child:
-                            // loading
-                            // ? const SizedBox(
-                            //     height: 25,
-                            //     width: 25,
-                            //     child: CircularProgressIndicator(
-                            //       strokeWidth: 2,
-                            //       color: Colors.white,
-                            //     ),
-                            //   )
-                            // :
-                            Text(
+                        child: Text(
                           isRegistered ? 'View Ticket' : 'Register',
                           style: TextStyle(
                               color: Colors.white,

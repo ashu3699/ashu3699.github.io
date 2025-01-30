@@ -14,7 +14,6 @@ class EventCategoryListPage extends StatefulWidget {
 }
 
 class _EventCategoryListPageState extends State<EventCategoryListPage> {
-  // final user = FirebaseAuth.instance.currentUser!;
   String? token;
 
   Map emojiList = {
@@ -38,55 +37,36 @@ class _EventCategoryListPageState extends State<EventCategoryListPage> {
     'cultural': '🎭',
   };
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getToken();
-  // }
-
-  // Future getToken() async {
-  //   token = await user.getIdToken(true);
-  //   log(token.toString());
-  //   setState(() {
-  //     token = token;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        setState(() {});
-      },
-      child: Scaffold(
-        backgroundColor: const Color(0xfff5f8fa),
-        appBar: customAppBar(context),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: FutureBuilder<List<Event>>(
-            future: ApiService.getAllEvents(token),
-            builder: (context, snapshot) {
-              List<Event>? eventList = snapshot.data;
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return const SizedBox(
-                    height: 100,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+    return Scaffold(
+      backgroundColor: const Color(0xfff5f8fa),
+      appBar: customAppBar(context),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: FutureBuilder<List<Event>>(
+          future: ApiService.getAllEvents(token),
+          builder: (context, snapshot) {
+            List<Event>? eventList = snapshot.data;
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return const SizedBox(
+                  height: 100,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              default:
+                if (snapshot.hasError) {
+                  return const Center(child: Text('Loading...'));
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: buildEvents(eventList!),
                   );
-                default:
-                  if (snapshot.hasError) {
-                    return const Center(child: Text('Loading...'));
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: buildEvents(eventList!),
-                    );
-                  }
-              }
-            },
-          ),
+                }
+            }
+          },
         ),
       ),
     );
@@ -183,7 +163,7 @@ class _EventCategoryListPageState extends State<EventCategoryListPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 18.0),
+                        padding: const EdgeInsets.only(left: 18),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

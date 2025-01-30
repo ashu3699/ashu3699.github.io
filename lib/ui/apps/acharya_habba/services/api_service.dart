@@ -225,44 +225,10 @@ class ApiService {
   ];
 
   static Future<List<Event>> getAllEvents(String? token) async {
-    // List<Event> list = [];
-
-    // final response = await http.get(
-    //   Uri.parse('$baseUrl/attendee/events'),
-    //   headers: {
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //     'Authorization': 'Bearer $token',
-    //   },
-    // );
-    // if (response.statusCode == 200) {
-    //   final body = json.decode(response.body);
-    //   final data = body['data']['events'] as List;
-    //   list = data.map<Event>((json) => Event.fromJson(json)).toList();
-    // }
-
     return fakeEvents;
   }
 
   static getEvent(String eventId, String? token) async {
-    // await Future.delayed(const Duration(milliseconds: 100));
-    // final response = await http.get(
-    //   Uri.parse('$baseUrl/attendee/events/$eventId'),
-    //   headers: {
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //     'Authorization': 'Bearer $token',
-    //   },
-    // );
-    // final body = json.decode(response.body);
-    // if (body['success']) {
-    //   log(body.toString());
-    //   final registered = body['data']['registered'];
-    //   final registrationCode = body['data']['registrationCode'];
-    //   return [registered, registrationCode];
-    // }
-    // return false;
-
-    //if eventId index is 0,1,2 then return registered, else return not registered
-    //find index of eventId in fakeEvents
     int id = fakeEvents.indexWhere((element) => element.id == eventId);
     return [id < 3, eventId];
   }
@@ -326,39 +292,12 @@ class ApiService {
   }
 
   static Future getTicket(String registrationCode, String? token) async {
-    // late Ticket ticket;
-    // late RegistrationData registration;
-    // late Event event;
-    // final response = await http.get(
-    //   Uri.parse('$baseUrl/attendee/events/tickets/$registrationCode'),
-    //   headers: {
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //     'Authorization': 'Bearer $token',
-    //   },
-    // );
-
-    // final body = json.decode(response.body);
-    // log(body.toString());
-    // if (body['success']) {
-    //   final data = body['data'];
-    //   registration = RegistrationData.fromJson(data['registration']);
-    //   event = Event.fromJson(data['event']);
-    //   ticket = Ticket(
-    //     event: event,
-    //     registration: registration,
-    //   );
-    // }
-    // return ticket;
-
-    //assuming registrationCode is same as eventId for fakeEvents
     Event event =
         fakeEvents.firstWhere((element) => element.id == registrationCode);
     final registration = RegistrationData(
       eventId: event.id,
       uid: 'uid123',
       registeredOn: 1632960000,
-      // status: 'confirmed',
-      //based on index, status will be set
       status: ['pending', 'confirmed', 'rejected'][math.Random().nextInt(2)],
       confirmedBy: 'Admin',
       confirmedOn: 1632960000,
@@ -370,30 +309,12 @@ class ApiService {
   }
 
   static Future<List<Ticket>> getAllTickets(String? token) async {
-    // late List<Ticket> list;
-    // final response = await http.get(
-    //   Uri.parse('$baseUrl/attendee/events/tickets/all'),
-    //   headers: {
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //     'Authorization': 'Bearer $token',
-    //   },
-    // );
-    // final body = json.decode(response.body);
-    // if (body['success']) {
-    //   final data = body['data']['tickets'] as List;
-    //   list = data.map<Ticket>((json) => Ticket.fromJson(json)).toList();
-    // }
-    // return list;
-
-    //return data using fakeEvents list
     List<Ticket> tickets = [];
     for (var event in fakeEvents) {
       final registration = RegistrationData(
         eventId: event.id,
         uid: 'uid123',
         registeredOn: 1632960000,
-        // status: 'confirmed',
-        //based on index, status will be set
         status: ['pending', 'confirmed', 'rejected'][math.Random().nextInt(2)],
         confirmedBy: 'Admin',
         confirmedOn: 1632960000,
@@ -404,7 +325,6 @@ class ApiService {
       tickets.add(Ticket(event: event, registration: registration));
     }
 
-    // send random data upto 3 tickets
     return tickets.sublist(0, 3);
   }
 

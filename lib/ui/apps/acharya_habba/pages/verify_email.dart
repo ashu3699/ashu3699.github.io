@@ -1,6 +1,5 @@
 import 'dart:async';
 
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,64 +14,15 @@ class VerifyEmailPage extends StatefulWidget {
 
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
   bool isEmailVerified = false;
-  bool canResendEmail = true;
+
   String email = "";
   Timer? timer;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-  //   email = FirebaseAuth.instance.currentUser!.email ?? "";
-
-  //   if (!isEmailVerified) {
-  //     timer = Timer.periodic(
-  //       const Duration(seconds: 3),
-  //       (_) => checkEmailVerified(),
-  //     );
-  //   }
-  // }
 
   @override
   void dispose() {
     timer!.cancel();
     super.dispose();
   }
-
-  // Future checkEmailVerified() async {
-  //   await FirebaseAuth.instance.currentUser!.reload();
-  //   isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-  //   if (isEmailVerified) timer?.cancel();
-  //   setState(() => canResendEmail = true);
-  // }
-
-  // Future sendVerificationEmail() async {
-  //   try {
-  //     User? user = FirebaseAuth.instance.currentUser;
-  //     if (user != null && !user.emailVerified) {
-  //       await user.sendEmailVerification();
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           behavior: SnackBarBehavior.floating,
-  //           content: Text("Email Sent!"),
-  //         ),
-  //       );
-  //     }
-
-  //     setState(() {
-  //       canResendEmail = false;
-  //     });
-  //     await Future.delayed(const Duration(seconds: 5));
-  //     setState(() => canResendEmail = true);
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         behavior: SnackBarBehavior.floating,
-  //         content: Text(e.toString()),
-  //       ),
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -148,15 +98,11 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     ElevatedButton.icon(
                       icon: const Icon(Icons.email),
                       label: const Text('Resend Email'),
-                      onPressed:
-                          // canResendEmail ? sendVerificationEmail :
-                          null,
+                      onPressed: null,
                     ),
                     TextButton(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                      ),
-                      // onPressed: (() => FirebaseAuth.instance.signOut()),
+                          minimumSize: const Size.fromHeight(50)),
                       onPressed: null,
                       child: const Text(
                         'Cancel',

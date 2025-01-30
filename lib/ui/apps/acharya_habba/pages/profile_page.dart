@@ -1,4 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +12,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
-  // final user = FirebaseAuth.instance.currentUser!;
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -51,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage>
         centerTitle: false,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        elevation: 0.0,
+        elevation: 0,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
@@ -68,10 +66,7 @@ class _ProfilePageState extends State<ProfilePage>
               ],
               borderRadius: BorderRadius.circular(50),
             ),
-            child: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              size: 15,
-            ),
+            child: const Icon(Icons.arrow_back_ios_new_rounded, size: 15),
           ),
         ),
       ),
@@ -90,8 +85,9 @@ class _ProfilePageState extends State<ProfilePage>
               turns: _animation,
               child: Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.sizeOf(context).height * 0.64,
-                    left: MediaQuery.sizeOf(context).width * 0.06),
+                  top: MediaQuery.sizeOf(context).height * 0.64,
+                  left: MediaQuery.sizeOf(context).width * 0.06,
+                ),
                 child: Text(
                   'Admin',
                   style: TextStyle(
@@ -123,8 +119,6 @@ class _ProfilePageState extends State<ProfilePage>
                       color: Color(0xffE16D25),
                     ),
                     backgroundColor: const Color(0xffd3d3d3),
-                    // foregroundColor: const Color(0xffE16D25),
-                    // data: user.uid,
                     data: 'Admin User ID',
                     version: QrVersions.auto,
                     size: MediaQuery.sizeOf(context).width * 0.3,

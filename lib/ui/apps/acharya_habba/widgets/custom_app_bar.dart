@@ -8,20 +8,15 @@ PreferredSizeWidget customAppBar(context,
     actions: [
       if (isProfileVisible)
         IconButton(
-          icon: const Icon(
-            Icons.badge,
-            color: Color(0xfff17295),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/profile');
-          },
-        )
+          icon: const Icon(Icons.badge, color: Color(0xfff17295)),
+          onPressed: () => Navigator.pushNamed(context, '/profile'),
+        ),
     ],
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: isBlack ? Brightness.dark : Brightness.dark,
       statusBarIconBrightness: isBlack ? Brightness.dark : Brightness.light,
     ),
-    elevation: 0.0,
+    elevation: 0,
     centerTitle: true,
     backgroundColor: Colors.transparent,
     foregroundColor: isBlack ? Colors.black : Colors.white,
@@ -30,10 +25,7 @@ PreferredSizeWidget customAppBar(context,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.asset(
-            'assets/square_logo.png',
-            height: 30,
-          ),
+          child: Image.asset('assets/square_logo.png', height: 30),
         ),
         const SizedBox(width: 10),
         Text(

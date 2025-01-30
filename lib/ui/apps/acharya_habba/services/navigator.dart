@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutterfire_ui/auth.dart';
 import 'package:provider/provider.dart';
 
 import '../models/event_list.dart';

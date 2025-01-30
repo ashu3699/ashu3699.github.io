@@ -1,12 +1,9 @@
 import 'dart:developer';
 
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-// import '../services/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -16,8 +13,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  // FirebaseAuth auth = FirebaseAuth.instance;
-
   final firstNameCtrl = TextEditingController();
   final lastNameCtrl = TextEditingController();
   final phoneCtrl = TextEditingController();
@@ -108,10 +103,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: TextField(
                                 controller: lastNameCtrl,
                                 decoration: const InputDecoration(
-                                    labelText: "Last Name",
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8)))),
+                                  labelText: "Last Name",
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8))),
+                                ),
                               ),
                             ),
                           ],
@@ -124,15 +120,16 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: TextField(
                           controller: emailCtrl,
                           decoration: const InputDecoration(
-                              suffix: Icon(
-                                FontAwesomeIcons.envelope,
-                                color: Colors.orange,
-                              ),
-                              labelText: "Email",
-                              hintText: "If Acharyan use Acharya email",
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)))),
+                            suffix: Icon(
+                              FontAwesomeIcons.envelope,
+                              color: Colors.orange,
+                            ),
+                            labelText: "Email",
+                            hintText: "If Acharyan use Acharya email",
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 15),
@@ -142,14 +139,15 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: TextField(
                           controller: phoneCtrl,
                           decoration: const InputDecoration(
-                              suffix: Icon(
-                                FontAwesomeIcons.phone,
-                                color: Colors.orange,
-                              ),
-                              labelText: "Phone",
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)))),
+                            suffix: Icon(
+                              FontAwesomeIcons.phone,
+                              color: Colors.orange,
+                            ),
+                            labelText: "Phone",
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 15),
@@ -160,23 +158,24 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: passwordCtrl,
                           obscureText: securePass,
                           decoration: InputDecoration(
-                              suffix: IconButton(
-                                alignment: Alignment.centerRight,
-                                padding: EdgeInsets.zero,
-                                icon: Icon(securePass
-                                    ? FontAwesomeIcons.eyeSlash
-                                    : FontAwesomeIcons.eye),
-                                color: Colors.orange,
-                                onPressed: () {
-                                  setState(() {
-                                    securePass = !securePass;
-                                  });
-                                },
-                              ),
-                              labelText: "Password",
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)))),
+                            suffix: IconButton(
+                              alignment: Alignment.centerRight,
+                              padding: EdgeInsets.zero,
+                              icon: Icon(securePass
+                                  ? FontAwesomeIcons.eyeSlash
+                                  : FontAwesomeIcons.eye),
+                              color: Colors.orange,
+                              onPressed: () {
+                                setState(() {
+                                  securePass = !securePass;
+                                });
+                              },
+                            ),
+                            labelText: "Password",
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),

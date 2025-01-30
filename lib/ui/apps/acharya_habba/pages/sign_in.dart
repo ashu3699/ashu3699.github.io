@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,8 +15,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  // FirebaseAuth auth = FirebaseAuth.instance;
-
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
   bool securePass = true;
@@ -108,23 +105,24 @@ class _SignInPageState extends State<SignInPage> {
                           controller: passwordCtrl,
                           obscureText: securePass,
                           decoration: InputDecoration(
-                              suffix: IconButton(
-                                alignment: Alignment.centerRight,
-                                padding: EdgeInsets.zero,
-                                icon: Icon(securePass
-                                    ? FontAwesomeIcons.eyeSlash
-                                    : FontAwesomeIcons.eye),
-                                color: Colors.orange,
-                                onPressed: () {
-                                  setState(() {
-                                    securePass = !securePass;
-                                  });
-                                },
-                              ),
-                              labelText: "Password",
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)))),
+                            suffix: IconButton(
+                              alignment: Alignment.centerRight,
+                              padding: EdgeInsets.zero,
+                              icon: Icon(securePass
+                                  ? FontAwesomeIcons.eyeSlash
+                                  : FontAwesomeIcons.eye),
+                              color: Colors.orange,
+                              onPressed: () {
+                                setState(() {
+                                  securePass = !securePass;
+                                });
+                              },
+                            ),
+                            labelText: "Password",
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                          ),
                         ),
                       ),
                       Padding(
@@ -203,7 +201,7 @@ class _SignInPageState extends State<SignInPage> {
                               padding: const EdgeInsets.all(0),
                             ),
                             onPressed: () async {
-                              Navigator.of(context).pushNamed('/sign_up');
+                              // Navigator.of(context).pushNamed('/sign_up');
                             },
                             child: Text(
                               "Don't have an account? Sign Up",
