@@ -6,7 +6,7 @@ import '../ui/scaffolds/scaffolds.dart';
 import 'routes.dart';
 
 final mainRouter = GoRouter(
-  initialLocation: MainRoutes.home.path,
+  initialLocation: '/',
   debugLogDiagnostics: true,
   routes: [
     ShellRoute(
