@@ -82,34 +82,36 @@ class _ProjectsPageState extends State<ProjectsPage> {
             );
           }),
         ),
-        Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: MobileScreenApp(selectedDevice: selectedDevice),
+        Expanded(
+          child: Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: MobileScreenApp(selectedDevice: selectedDevice),
+                ),
               ),
-            ),
-            //button to switch ios/android
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  if (selectedDevice == iosDevice) {
-                    selectedDevice = androidDevice;
-                  } else {
-                    selectedDevice = iosDevice;
-                  }
-                });
-              },
-              child: Text(
-                selectedDevice == iosDevice
-                    ? 'Switch to Android'
-                    : 'Switch to iOS',
-                style: TextStyle(color: Colors.black),
+              //button to switch ios/android
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    if (selectedDevice == iosDevice) {
+                      selectedDevice = androidDevice;
+                    } else {
+                      selectedDevice = iosDevice;
+                    }
+                  });
+                },
+                child: Text(
+                  selectedDevice == iosDevice
+                      ? 'Switch to Android'
+                      : 'Switch to iOS',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ],
     );
