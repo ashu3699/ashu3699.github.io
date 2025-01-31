@@ -42,7 +42,7 @@ class BaseScaffold extends StatelessWidget {
         items: [
           ListTile(
             title: const Text('Home', style: TextStyle(color: Colors.white)),
-            onTap: () => context.go(MainRoutes.home.path),
+            onTap: () => context.go('/'),
           ),
           ListTile(
             title: const Text('About', style: TextStyle(color: Colors.white)),
@@ -84,7 +84,7 @@ class BaseScaffold extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => context.go(MainRoutes.home.path),
+            onPressed: () => context.go('/'),
             child: const Text('Home', style: textStyle),
           ),
           TextButton(

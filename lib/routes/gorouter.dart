@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../ui/apps/apps.dart';
@@ -5,37 +6,51 @@ import '../ui/pages/pages.dart';
 import '../ui/scaffolds/scaffolds.dart';
 import 'routes.dart';
 
+final _parentKey = GlobalKey<NavigatorState>();
+final _shellKey = GlobalKey<NavigatorState>();
+
 final mainRouter = GoRouter(
+  navigatorKey: _parentKey,
   initialLocation: '/',
   debugLogDiagnostics: true,
   routes: [
     ShellRoute(
+      navigatorKey: _shellKey,
       builder: (context, state, child) => BaseScaffold(child: child),
       routes: [
         GoRoute(
+          parentNavigatorKey: _shellKey,
+          name: 'home',
           path: '/',
           builder: (context, state) => const HomePage(),
-          redirect: (context, state) => MainRoutes.home.path,
         ),
+        // GoRoute(
+        //   parentNavigatorKey: _shellKey,
+        //   name: 'home',
+        //   path: MainRoutes.home.path,
+        //   builder: (context, state) => const HomePage(),
+        // ),
         GoRoute(
-          path: MainRoutes.home.path,
-          builder: (context, state) => const HomePage(),
-          redirect: (context, state) => MainRoutes.home.path,
-        ),
-        GoRoute(
+          parentNavigatorKey: _shellKey,
+          name: 'about',
           path: MainRoutes.about.path,
           builder: (context, state) => const AboutPage(),
-          redirect: (context, state) => MainRoutes.about.path,
         ),
         GoRoute(
+          parentNavigatorKey: _shellKey,
+          name: 'contact',
           path: MainRoutes.contact.path,
           builder: (context, state) => const ContactPage(),
         ),
         GoRoute(
+          parentNavigatorKey: _shellKey,
+          name: 'experience',
           path: MainRoutes.experience.path,
           builder: (context, state) => const ExperiencePage(),
         ),
         GoRoute(
+          parentNavigatorKey: _shellKey,
+          name: 'projects',
           path: MainRoutes.projects.path,
           builder: (context, state) => const ProjectsPage(),
           routes: [
