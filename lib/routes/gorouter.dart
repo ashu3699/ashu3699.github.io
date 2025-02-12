@@ -67,6 +67,10 @@ final mainRouter = GoRouter(
               builder: (context, state) => const AcharyaHabbaApp(),
             ),
             GoRoute(
+              path: '/acharyaplacementcell',
+              builder: (context, state) => const AcharyaPlacementCellApp(),
+            ),
+            GoRoute(
               path: '/asteroids',
               builder: (context, state) => const AsteroidsApp(),
             ),
@@ -99,6 +103,10 @@ final mobileRouter = GoRouter(
         GoRoute(
           path: ProjectRoutes.acharyahabba.path,
           builder: (context, state) => const AcharyaHabbaApp(),
+        ),
+        GoRoute(
+          path: ProjectRoutes.acharyaplacementcell.path,
+          builder: (context, state) => const AcharyaPlacementCellApp(),
         ),
         GoRoute(
           path: ProjectRoutes.asteroids.path,
