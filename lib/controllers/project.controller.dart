@@ -7,13 +7,24 @@ import '../ui/apps/apps.dart';
 class ProjectController extends ChangeNotifier {
   final List<Project> apps = [
     Project(
+      title: 'Placement Cell',
+      description: 'An app for Acharya Placement Cell.\n\n'
+          'Features include job listings, student profiles, and more.\n\n'
+          'Note: For demo login, use the following credentials:\n'
+          'Email: admin@acharya.ac.in\n'
+          'Password: admin',
+      imageUrl: 'assets/placement_logo.png',
+      appWidget: const AcharyaPlacementCellApp(),
+      route: ProjectRoutes.acharyaplacementcell.path,
+    ),
+    Project(
       title: 'Acharya Habba',
       description: 'An event management app for Acharya Habba.\n\n'
           'Features include event registration, event details, and more.\n\n'
           'Note: For demo login, use the following credentials:\n'
           'Email: admin\n'
           'Password: admin',
-      imageUrl: 'assets/app_logo.png',
+      imageUrl: 'assets/habba_logo.png',
       appWidget: const AcharyaHabbaApp(),
       route: ProjectRoutes.acharyahabba.path,
     ),
